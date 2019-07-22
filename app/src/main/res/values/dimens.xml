@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="activity_horizontal_margin_thin">16dp</dimen>
+    <dimen name="activity_vertical_margin_thin">16dp</dimen>
+
+    <dimen name="activity_login_margin">25dp</dimen>
+    <dimen name="login_app_name_font_size">70sp</dimen>
+
+    <dimen name="login_button_register_font_size">70sp</dimen>
+
+    <dimen name="splash_screen_icon_height">100dp</dimen>
+    <dimen name="splash_screen_icon_width">100dp</dimen>
+</resources>

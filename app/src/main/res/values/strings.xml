@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">ChatApp</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="create_new_account">Create new account</string>
+    <string name="can_not_be_empty">Can not be empty</string>
+
+    <string name="login_auth_error_user_not_found">There is no user record corresponding to this email and password</string>
+    <string name="login_auth_error_wrong_password">The password is invalid. Please try again</string>
+
+    <string name="sign_out">Sign out</string>
 </resources>
