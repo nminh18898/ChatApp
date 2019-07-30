@@ -4,7 +4,7 @@
     <item
         android:drawable="@drawable/message_icon"
         android:gravity="center"
-        android:layout_height="@dimen/splash_screen_icon_height"
-        android:layout_width="@dimen/splash_screen_icon_width">
+        android:height="@dimen/splash_screen_icon_height"
+        android:width="@dimen/splash_screen_icon_width">
     </item>
 </layer-list>

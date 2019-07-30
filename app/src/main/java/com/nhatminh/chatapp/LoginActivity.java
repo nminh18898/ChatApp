@@ -23,11 +23,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseUser;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Button btnLogin;
+    Button btnLogin, btnRegister;
     EditText etUsername, etPassword;
-    TextView tvRegister;
     ProgressBar pbSignInProgress;
 
     private FirebaseAuth mFirebaseAuth;
@@ -46,32 +45,14 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
-        tvRegister = findViewById(R.id.tvRegister);
+        btnRegister = findViewById(R.id.btnRegister);
         pbSignInProgress = findViewById(R.id.pbSignInProgress);
 
         mFirebaseAuth = FirebaseAuth.getInstance();
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String username = etUsername.getText().toString();
-                String password = etPassword.getText().toString();
 
-                if (username.isEmpty()) {
-                    etUsername.setError(getResources().getString(R.string.can_not_be_empty));
-                    return;
-                }
+        btnLogin.setOnClickListener(this);
+        btnRegister.setOnClickListener(this);
 
-                if (password.isEmpty()) {
-                    etPassword.setError(getResources().getString(R.string.can_not_be_empty));
-                    return;
-                }
-
-
-                //For testing, handle later
-                signIn("123@gmail.com", "123456");
-
-            }
-        });
     }
 
     /**
@@ -111,9 +92,31 @@ public class LoginActivity extends AppCompatActivity {
                             }
                         }
                         pbSignInProgress.setVisibility(View.GONE);
-
                     }
                 });
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId())
+        {
+            case R.id.btnLogin:
+                String username = etUsername.getText().toString();
+                String password = etPassword.getText().toString();
+
+                if (username.isEmpty()) {
+                    etUsername.setError(getResources().getString(R.string.can_not_be_empty));
+                    return;
+                }
+                if (password.isEmpty()) {
+                    etPassword.setError(getResources().getString(R.string.can_not_be_empty));
+                    return;
+                }
+
+                //For testing, handle later
+                signIn("123@gmail.com", "123456");
+                break;
+        }
+
+    }
 }
