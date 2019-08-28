@@ -4,31 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.LoginActivity"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".Activity.SignUpActivity"
     android:orientation="vertical"
-    android:gravity="center"
     android:background="@color/colorPrimary"
-    >
+    android:gravity="center">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        android:textSize="@dimen/login_app_name_font_size"
+        android:text="@string/create_your_account"
+        android:textSize="@dimen/sign_up_title_font_size"
         android:gravity="center"
         android:textColor="@color/colorTextPrimary"
-        android:fontFamily="@font/app_name_font"
-        android:layout_marginBottom="@dimen/activity_login_margin"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
         />
 
     <EditText
+        android:id="@+id/etEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/etEmail"
         android:inputType="text"
         android:maxLines="1"
         android:hint="@string/email"
@@ -36,12 +30,14 @@
         android:textColor="@color/colorTextPrimary"
         android:backgroundTint="@color/colorTextPrimary"
         android:textColorHint="@color/colorTextPrimaryLight"
-        />
+        android:layout_marginLeft="@dimen/activity_horizontal_margin_thin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin_thin">
+    </EditText>
 
     <EditText
+        android:id="@+id/etPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/etPassword"
         android:inputType="textPassword"
         android:maxLines="1"
         android:hint="@string/password"
@@ -49,33 +45,40 @@
         android:textColor="@color/colorTextPrimary"
         android:backgroundTint="@color/colorTextPrimary"
         android:textColorHint="@color/colorTextPrimaryLight"
-        />
+        android:layout_marginLeft="@dimen/activity_horizontal_margin_thin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin_thin" />
 
-    <Button
-        android:id="@+id/btnLogin"
+    <EditText
+        android:id="@+id/etConfirmPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/login"
+        android:inputType="textPassword"
+        android:maxLines="1"
+        android:hint="@string/confirm_password"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:background="@drawable/rounded_button"
-        android:layout_marginTop="@dimen/activity_login_margin"
-        android:textColor="@color/colorPrimary"
-        android:textSize="18sp"/>
-
-    <Button
-        android:id="@+id/btnRegister"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/create_new_account"
-        android:textSize="18sp"
-        android:gravity="center"
         android:textColor="@color/colorTextPrimary"
-        android:background="@color/colorPrimary"
-        style="?android:attr/borderlessButtonStyle"
+        android:backgroundTint="@color/colorTextPrimary"
+        android:textColorHint="@color/colorTextPrimaryLight"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin_thin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin_thin"
         />
 
+    <Button
+        android:id="@+id/btnCreateAccount"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="@string/create"
+
+        android:textColor="@color/colorPrimary"
+        android:background="@drawable/rounded_button"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin_thin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin_thin">
+
+    </Button>
+
     <ProgressBar
-        android:id="@+id/pbSignInProgress"
+        android:id="@+id/pbSignUpProgress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:indeterminate="true"
@@ -83,4 +86,6 @@
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:visibility="gone"
         />
-</LinearLayout >
+
+
+</LinearLayout>

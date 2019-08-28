@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="4dp">
+
+    <ImageView
+        android:id="@+id/ivUserProfilePicture"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@drawable/default_profile_picture"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/tvConversationName"
+        android:text="John Doe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toRightOf="@+id/ivUserProfilePicture"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin_thin"
+        android:layout_marginTop="@dimen/activity_vertical_margin_super_thin"
+        android:textColor="#000000"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/tvLastMessageSent"
+        android:text="Hello"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toRightOf="@+id/ivUserProfilePicture"
+        app:layout_constraintTop_toBottomOf="@+id/tvConversationName"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin_thin"
+        android:layout_marginTop="@dimen/activity_vertical_margin_super_thin"
+        android:textColor="@color/gray"
+        android:maxLines="1"
+        android:maxLength="24"
+       />
+
+    <TextView
+        android:id="@+id/tvTimeStamp"
+        android:text="11:00"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toRightOf="@+id/tvLastMessageSent"
+        app:layout_constraintTop_toBottomOf="@+id/tvConversationName"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin_thin"
+        android:layout_marginTop="@dimen/activity_vertical_margin_super_thin"
+        android:textColor="@color/gray"
+        android:maxLines="1"
+        android:maxLength="24"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

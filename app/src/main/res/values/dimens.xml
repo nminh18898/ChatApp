@@ -3,14 +3,29 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-    <dimen name="activity_horizontal_margin_thin">16dp</dimen>
-    <dimen name="activity_vertical_margin_thin">16dp</dimen>
+    <dimen name="activity_padding">16dp</dimen>
+    <dimen name="activity_padding_thin">10dp</dimen>
+    <dimen name="activity_padding_super_thin">4dp</dimen>
+
+
+    <dimen name="activity_horizontal_margin_thin">10dp</dimen>
+    <dimen name="activity_vertical_margin_thin">10dp</dimen>
+    <dimen name="activity_horizontal_margin_super_thin">4dp</dimen>
+    <dimen name="activity_vertical_margin_super_thin">4dp</dimen>
 
     <dimen name="activity_login_margin">25dp</dimen>
     <dimen name="login_app_name_font_size">70sp</dimen>
+    <dimen name="sign_up_title_font_size">30sp</dimen>
 
     <dimen name="login_button_register_font_size">70sp</dimen>
 
     <dimen name="splash_screen_icon_height">100dp</dimen>
     <dimen name="splash_screen_icon_width">100dp</dimen>
+    <dimen name="sign_up_form_title">20sp</dimen>
+    <dimen name="sign_up_form_radio_button_text_size">20sp</dimen>
+    <dimen name="sign_up_form_headline_text_size">18sp</dimen>
+    <dimen name="profile_picture_size">48dp</dimen>
+    <dimen name="profile_picture_size_large">72dp</dimen>
+    <dimen name="profile_picture_size_extra_large">96dp</dimen>
+
 </resources>

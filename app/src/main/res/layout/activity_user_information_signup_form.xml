@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.UserInformationSignUpForm"
+    android:background="@color/colorPrimary"
+
+    >
+
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/please_fill_in_the_registration_form"
+        android:textColor="@color/colorTextPrimary"
+        android:textSize="@dimen/sign_up_form_title"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin_thin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin_thin"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        />
+
+
+
+    <EditText
+        android:id="@+id/etFirstName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:maxLines="1"
+        android:hint="@string/first_name"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:textColor="@color/colorTextPrimary"
+        android:backgroundTint="@color/colorTextPrimary"
+        android:textColorHint="@color/colorTextPrimaryLight"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        app:layout_constraintRight_toLeftOf="@id/etLastName"
+        android:layout_marginRight="@dimen/activity_horizontal_margin_thin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin_thin"
+        app:layout_constraintHorizontal_weight="1"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        />
+
+    <EditText
+        android:id="@+id/etLastName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:maxLines="1"
+        android:hint="@string/last_name"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:textColor="@color/colorTextPrimary"
+        android:backgroundTint="@color/colorTextPrimary"
+        android:textColorHint="@color/colorTextPrimaryLight"
+        app:layout_constraintLeft_toRightOf="@id/etFirstName"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="@dimen/activity_horizontal_margin_thin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin_thin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+
+        app:layout_constraintHorizontal_weight="1"
+        />
+
+    <TextView
+        android:id="@+id/tvGenderTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/gender"
+        android:textColor="@color/colorTextPrimaryLight"
+        android:textSize="@dimen/sign_up_form_headline_text_size"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etFirstName"
+
+        android:layout_marginRight="@dimen/activity_horizontal_margin_thin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin_thin"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"/>
+
+    <RadioGroup
+        android:id="@+id/rgGender"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvGenderTitle"
+
+        android:layout_marginTop="@dimen/activity_vertical_margin_thin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:orientation="horizontal"
+        >
+
+        <RadioButton
+            android:id="@+id/rbMale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/colorTextPrimary"
+            android:text="@string/male"
+            android:textColor="@color/colorTextPrimary"
+            android:textSize="@dimen/sign_up_form_radio_button_text_size"
+            android:layout_weight="1"
+            android:tag="MALE"/>
+
+        <RadioButton
+            android:id="@+id/rbFemale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorTextPrimary"
+            android:buttonTint="@color/colorTextPrimary"
+            android:text="@string/female"
+            android:textSize="@dimen/sign_up_form_radio_button_text_size"
+           android:layout_weight="1"
+            android:tag="FEMALE"
+            />
+
+        <RadioButton
+            android:id="@+id/rbGenderOther"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorTextPrimary"
+            android:buttonTint="@color/colorTextPrimary"
+            android:text="@string/other"
+            android:textSize="@dimen/sign_up_form_radio_button_text_size"
+            android:layout_weight="1"
+            android:tag="OTHER"
+            />
+
+    </RadioGroup>
+
+
+    <EditText
+        android:id="@+id/etBirthDay"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin_thin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin_thin"
+        android:backgroundTint="@color/colorTextPrimary"
+        android:hint="@string/your_birthday"
+        android:inputType="date"
+        android:maxLines="1"
+        android:textColor="@color/colorTextPrimary"
+        android:textColorHint="@color/colorTextPrimaryLight"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/btnSelectBirthDay"
+        app:layout_constraintTop_toBottomOf="@id/rgGender"
+
+
+        />
+   <Button
+       android:id="@+id/btnSelectBirthDay"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+
+       app:layout_constraintLeft_toRightOf="@id/etBirthDay"
+       app:layout_constraintTop_toBottomOf="@id/rgGender"
+       app:layout_constraintRight_toRightOf="parent"
+       android:layout_marginRight="@dimen/activity_horizontal_margin_thin"
+       android:layout_marginLeft="@dimen/activity_horizontal_margin_thin"
+       android:layout_marginTop="@dimen/activity_vertical_margin"
+
+       android:text="@string/select"
+      />
+
+
+    <EditText
+        android:id="@+id/etPhone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:hint="@string/your_phone"
+        android:textColor="@color/colorTextPrimary"
+        android:backgroundTint="@color/colorTextPrimary"
+        android:textColorHint="@color/colorTextPrimaryLight"
+        android:maxLines="1"
+        app:layout_constraintTop_toBottomOf="@id/etBirthDay"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="@dimen/activity_horizontal_margin_thin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin_thin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+
+
+        />
+
+    <TextView
+        android:id="@+id/tvSelectProfilePictureTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/select_your_profile_picture"
+        android:textColor="@color/colorTextPrimaryLight"
+        android:textSize="@dimen/sign_up_form_headline_text_size"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etPhone"
+
+        android:layout_marginRight="@dimen/activity_horizontal_margin_thin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin_thin"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"/>
+
+    <ImageView
+        android:id="@+id/ivProfilePicturePreview"
+        android:layout_width="@dimen/profile_picture_size_extra_large"
+        android:layout_height="@dimen/profile_picture_size_extra_large"
+        android:background="@drawable/default_profile_picture"
+        app:layout_constraintTop_toBottomOf="@id/tvSelectProfilePictureTitle"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_horizontal_margin_thin"
+        android:scaleType="centerCrop"/>
+
+
+    <Button
+        android:id="@+id/btnChangePicture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintLeft_toRightOf="@id/ivProfilePicturePreview"
+        app:layout_constraintTop_toBottomOf="@id/tvSelectProfilePictureTitle"
+        app:layout_constraintBottom_toTopOf="@+id/btnSubmit"
+
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+
+
+        android:text="@string/change"
+        />
+
+
+    <Button
+        android:id="@+id/btnSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginRight="@dimen/activity_horizontal_margin_thin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin_thin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+
+        android:text="@string/submit"
+
+        app:layout_constraintTop_toBottomOf="@id/ivProfilePicturePreview"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+
+        >
+
+    </Button>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
