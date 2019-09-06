@@ -3,10 +3,10 @@ package com.nhatminh.chatapp.Model;
 public class UserMessage {
     String messageContent;
     String senderId;
-    long createdAt;
+    String createdAt;
 
 
-    public UserMessage(String messageContent, String senderId, long createdAt) {
+    public UserMessage(String messageContent, String senderId, String createdAt) {
         this.messageContent = messageContent;
         this.senderId = senderId;
         this.createdAt = createdAt;
@@ -32,11 +32,11 @@ public class UserMessage {
         this.senderId = senderId;
     }
 
-    public long getCreatedAt() {
+    public String getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(long createdAt) {
+    public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
 }

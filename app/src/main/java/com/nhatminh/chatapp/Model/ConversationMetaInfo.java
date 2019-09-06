@@ -4,13 +4,13 @@ public class ConversationMetaInfo {
 
     String title;
     String lastMessageSent;
-    long timeStamp;
+    String timeStamp;
 
 
     public ConversationMetaInfo() {
     }
 
-    public ConversationMetaInfo(String title, String lastMessageSent, long timeStamp) {
+    public ConversationMetaInfo(String title, String lastMessageSent, String timeStamp) {
         this.title = title;
         this.lastMessageSent = lastMessageSent;
         this.timeStamp = timeStamp;
@@ -32,11 +32,11 @@ public class ConversationMetaInfo {
         this.lastMessageSent = lastMessageSent;
     }
 
-    public long getTimeStamp() {
+    public String getTimeStamp() {
         return timeStamp;
     }
 
-    public void setTimeStamp(long timeStamp) {
+    public void setTimeStamp(String timeStamp) {
         this.timeStamp = timeStamp;
     }
 }

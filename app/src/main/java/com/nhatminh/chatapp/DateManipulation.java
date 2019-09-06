@@ -1,5 +1,8 @@
 package com.nhatminh.chatapp;
 
+import android.widget.Toast;
+
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -7,7 +10,10 @@ import java.util.Date;
 public class DateManipulation {
 
     static final String DATE_FORMAT = "dd/MM/yyyy";
-    SimpleDateFormat dateFormat;
+    static SimpleDateFormat dateFormat;
+    static SimpleDateFormat timestampFormat = new SimpleDateFormat("EEE, HH:mm");
+
+
 
 
     public DateManipulation() {
@@ -42,4 +48,9 @@ public class DateManipulation {
     public SimpleDateFormat getDateFormat() {
         return dateFormat;
     }
+
+    public String timestampToString(Timestamp timestamp){
+        return timestampFormat.format(timestamp);
+    }
+
 }

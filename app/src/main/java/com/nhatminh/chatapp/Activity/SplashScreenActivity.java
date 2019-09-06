@@ -25,7 +25,7 @@ public class SplashScreenActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         } else {
-            Intent intent = new Intent(this, ChatRoom.class);
+            Intent intent = new Intent(this, ChatRoomTab.class);
             startActivity(intent);
             finish();
         }

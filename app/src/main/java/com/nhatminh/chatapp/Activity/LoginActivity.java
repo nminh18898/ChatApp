@@ -58,7 +58,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         pbSignInProgress.setVisibility(View.GONE);
                         if(task.isSuccessful()) {
-                            Intent intent = new Intent(LoginActivity.this, ChatRoom.class);
+                            Intent intent = new Intent(LoginActivity.this, ChatRoomTab.class);
                             startActivity(intent);
                             finish();
                         }
@@ -84,10 +84,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                  *     Comment for testing, must uncomment when finish testing
                  */
 
-                 /*if (!isEmailAndPasswordEmpty(email,password))
+                 if (!isEmailAndPasswordEmpty(email,password))
                 {
                     signIn(email, password);
-                }*/
+                }
 
                 /**
                  *
@@ -99,7 +99,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                  *      Use for testing, must delete this code
                  */
 
-                signIn("huynhminh@gmail.com", "123456");
+               /* signIn("huynhminh@gmail.com", "123456");*/
 
                 /**
                  * end test

@@ -6,12 +6,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.firebase.FirebaseError;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -21,54 +29,85 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.nhatminh.chatapp.Adapter.MessageListAdapter;
 import com.nhatminh.chatapp.CompleteFlag;
+import com.nhatminh.chatapp.DateManipulation;
 import com.nhatminh.chatapp.GlobalConstants;
 import com.nhatminh.chatapp.Model.BasicUserInfo;
 import com.nhatminh.chatapp.Model.ConversationMetaInfo;
+import com.nhatminh.chatapp.Model.User;
 import com.nhatminh.chatapp.Model.UserMessage;
 import com.nhatminh.chatapp.R;
 
 import org.w3c.dom.Comment;
 
+
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class ChatActivity extends AppCompatActivity {
+public class ChatActivity extends AppCompatActivity implements View.OnClickListener {
 
-    // conversation id from previous activity
+    // conversation id and title from previous activity
     String conversationId;
+    String conversationTitle;
 
     //variables use for store data load from database
     HashMap<String, String> members = new HashMap<>();
     CompleteFlag isCompleteLoadingData = new CompleteFlag();
     ArrayList<UserMessage> messageList = new ArrayList<>();
 
-    // variables use for display message
+
+    // variables and view use for display message
     RecyclerView messageRecycler;
     MessageListAdapter messageAdapter;
+    Button btnSend;
+    EditText etMessageContent;
+    LinearLayoutManager linearLayoutManager;
+
+    //convert timestamp to String
+    DateManipulation dateManipulation = new DateManipulation();
+
+
+    FirebaseUser currentUser;
+    ChildEventListener memberListener, messageListener;
+    DatabaseReference memberRef, messageRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+        setupView();
 
         conversationId = getIntent().getExtras().getString(GlobalConstants.CONVERSATION_ID);
+        conversationTitle = getIntent().getExtras().getString(GlobalConstants.CONVERSATION_TITLE);
 
-        loadConversationMemberIdAndName();
-        loadConversationMessages();
 
+
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        loadConversationMemberIdAndName();
+        loadConversationMessages();
+    }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        messageRef.removeEventListener(messageListener);
+        memberRef.removeEventListener(memberListener);
+
+    }
 
     void loadConversationMemberIdAndName() {
 
         isCompleteLoadingData.addFlag(false);
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("members").child(conversationId);
-
-
-        ChildEventListener membersListener = new ChildEventListener() {
+        memberRef = FirebaseDatabase.getInstance().getReference().child("members").child(conversationId);
+        memberListener = memberRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
                 members.put(dataSnapshot.getKey(),dataSnapshot.getValue().toString());
@@ -92,11 +131,9 @@ public class ChatActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        };
+        });
 
-        ref.addChildEventListener(membersListener);
-
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+        memberRef.addListenerForSingleValueEvent(new ValueEventListener() {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 isCompleteLoadingData.setOneFlagComplete();
                 loadComplete();
@@ -113,14 +150,21 @@ public class ChatActivity extends AppCompatActivity {
     void loadConversationMessages(){
         isCompleteLoadingData.addFlag(false);
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("conversation").child(conversationId);
+        messageRef = FirebaseDatabase.getInstance().getReference().child("conversation").child(conversationId);
 
-        ref.addChildEventListener(new ChildEventListener() {
+        messageListener = messageRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
                 UserMessage userMessage = dataSnapshot.getValue(UserMessage.class);
                 messageList.add(userMessage);
 
+                if(isCompleteLoadingData.isAllFlagComplete()){
+                    messageAdapter.notifyDataSetChanged();
+                    makeAsLastMessage(userMessage);
+                    scrollToBottomMessageList();
+
+                }
             }
 
             @Override
@@ -144,7 +188,7 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+        messageRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 isCompleteLoadingData.setOneFlagComplete();
@@ -159,23 +203,108 @@ public class ChatActivity extends AppCompatActivity {
 
     }
 
+    private void makeAsLastMessage(UserMessage message){
+        ConversationMetaInfo metaInfo = new ConversationMetaInfo(conversationTitle,message.getMessageContent(),message.getCreatedAt());
+        FirebaseDatabase.getInstance().getReference()
+                .child("conversationMetaInfo")
+                .child(conversationId)
+                .setValue(metaInfo);
+    }
+
+    private void hideKeyboard(){
+        InputMethodManager imm = (InputMethodManager)getSystemService(
+                Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(etMessageContent.getWindowToken(), 0);
+    }
+
     private void loadComplete(){
         if (isCompleteLoadingData.isAllFlagComplete())
         {
-
-
-
-            messageRecycler = (RecyclerView) findViewById(R.id.reyclerview_message_list);
-            messageAdapter = new MessageListAdapter(this, messageList,
-                    FirebaseAuth.getInstance().getCurrentUser().getUid(), members);
-            messageRecycler.setLayoutManager(new LinearLayoutManager(this));
-            messageRecycler.setAdapter(messageAdapter);
-
+           createAdapter();
         }
+
+    }
+
+    private void createAdapter(){
+        messageAdapter = new MessageListAdapter(this, messageList,
+               currentUser.getUid(), members);
+        linearLayoutManager = new LinearLayoutManager(this);
+
+        linearLayoutManager.setStackFromEnd(true);
+        linearLayoutManager.setSmoothScrollbarEnabled(true);
+
+        messageRecycler.setLayoutManager(linearLayoutManager);
+        messageRecycler.setAdapter(messageAdapter);
+
+    }
+
+    private void scrollToBottomMessageList(){
+        int messageCount = messageAdapter.getItemCount();
+        messageRecycler.smoothScrollToPosition(messageCount-1);
+    }
+
+    private void setupView()
+    {
+        messageRecycler = findViewById(R.id.reyclerview_message_list);
+        btnSend = findViewById(R.id.btnSend);
+        etMessageContent = findViewById(R.id.etMessageContent);
+        btnSend.setOnClickListener(this);
+
+        btnSend.setEnabled(false);
+
+        //disable send button when edit text is empty
+        etMessageContent.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(s.toString().trim().length() == 0){
+                    btnSend.setEnabled(false);
+                }
+                else{
+                    btnSend.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+
 
     }
 
 
 
 
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btnSend:
+                Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                UserMessage data = new UserMessage(etMessageContent.getText().toString(),
+                        FirebaseAuth.getInstance().getCurrentUser().getUid(),
+                        dateManipulation.timestampToString(timestamp));
+
+                addMessageToFireBase(data);
+                etMessageContent.getText().clear();
+                hideKeyboard();
+                break;
+        }
+    }
+
+
+
+    private void addMessageToFireBase(UserMessage message)
+    {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("conversation").child(conversationId).push();
+        ref.setValue(message);
+
+    }
 }
