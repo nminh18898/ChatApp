@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.ChatActivity"
+    tools:context=".conversation.ChatActivity"
     android:padding="@dimen/activity_padding_thin">
 
     <androidx.recyclerview.widget.RecyclerView

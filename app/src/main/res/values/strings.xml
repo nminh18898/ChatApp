@@ -44,4 +44,12 @@
     <string name="something_went_wrong">Something went wrong</string>
     <string name="please_allow_this_app_to_read_and_write_to_your_storage">Please allow this app to read and write to your storage</string>
 
+    <string name="message_title">Message</string>
+    <string name="friends_title">Friends</string>
+    <string name="account_title">Account</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
 </resources>

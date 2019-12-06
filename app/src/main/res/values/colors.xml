@@ -15,4 +15,6 @@
     <color name="white">#ffffff</color>
     <color name="gray">#602C2C2C</color>
 
+    <color name="bgBottomNavigation">#124FFC</color>
+
 </resources>
